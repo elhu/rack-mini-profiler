@@ -281,9 +281,9 @@ module Rack
             current.measure = false
             # first param is the path
             # 0.5 means attempt to collect a sample each 0.5 millisecs
-            match_data = query_string.match(/flamegraph_sample_rate=(?<rate>\d+)/)
-            if match_data && match_data[:rate].to_i != 0
-              sample_rate = match_data[:rate].to_i
+            match_data = query_string.match(/flamegraph_sample_rate=(?<rate>[\d\.]+)/)
+            if match_data && !match_data[:rate].to_f.zero?
+              sample_rate = match_data[:rate].to_f
             else
               sample_rate = config.flamegraph_sample_rate
             end
