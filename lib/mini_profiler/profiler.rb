@@ -280,8 +280,8 @@ module Rack
             # do not sully our profile with mini profiler timings
             current.measure = false
             # first param is the path
-            # 0.5 means attempt to collect a sample each 0.5 secs
-            flamegraph = Flamegraph.generate(nil, fidelity: 0.5, embed_resources: query_string =~ /embed/) do
+            # 0.5 means attempt to collect a sample each 0.5 millisecs
+            flamegraph = Flamegraph.generate(nil, fidelity: config.flamegraph_frequency, embed_resources: query_string =~ /embed/) do
               status,headers,body = @app.call(env)
             end
           end
