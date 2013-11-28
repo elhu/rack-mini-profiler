@@ -13,9 +13,9 @@ module Rack
     end
 
     attr_accessor :authorization_mode, :auto_inject, :backtrace_ignores, :backtrace_includes, :backtrace_remove,
-      :backtrace_threshold_ms, :base_url_path, :enabled, :flamegraph_frequency, :logger, :position, :pre_authorize_cb, :skip_paths,
-      :skip_schema_queries, :start_hidden, :storage, :storage_failure, :storage_instance, :storage_options,
-      :toggle_shortcut, :user_provider
+      :backtrace_threshold_ms, :base_url_path, :enabled, :flamegraph_sample_rate, :logger, :position,
+      :pre_authorize_cb, :skip_paths, :skip_schema_queries, :start_hidden, :storage, :storage_failure,
+      :storage_instance, :storage_options, :toggle_shortcut, :user_provider
 
     # Deprecated options
     attr_accessor :use_existing_jquery
@@ -37,7 +37,7 @@ module Rack
           @toggle_shortcut = 'Alt+P'
           @start_hidden = false
           @backtrace_threshold_ms = 0
-          @flamegraph_frequency = 0.5
+          @flamegraph_sample_rate = 0.5
           @storage_failure = Proc.new do |exception|
             if @logger
               @logger.warn("MiniProfiler storage failure: #{exception.message}")
